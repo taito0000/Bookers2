@@ -1,0 +1,31 @@
+<div class="container">
+  <div id="error_explanation">
+    <% if @user.errors.any? %>
+      <%= @user.errors.count %>error prohibited this obj from being saved:
+      <% @user.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>User info</h1>
+      <%= form_with model:@user, local:true do |f| %>
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <%= f.text_field :name, id:"inputName" %>
+        </div>
+        <div class="formm-group">
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+          <label for="inputImage">Image</label>
+          <%= f.attachment_field :profile_image %>
+        </div>
+        <div class="form-group">
+          <label for="inputIntroduction">introduction</label>
+          <%= f.text_area :introduction, id:"inputIntroduction" %>
+          <%= f.submit "Update User" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
